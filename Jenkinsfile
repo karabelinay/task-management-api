@@ -1,3 +1,4 @@
+```groovy
 pipeline {
     agent any
 
@@ -9,10 +10,19 @@ pipeline {
             }
         }
 
-        stage('JaCoCo') {
+        stage('JaCoCo Report') {
             steps {
                 bat 'mvn jacoco:report'
             }
         }
+
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    bat 'mvn sonar:sonar -Dsonar.projectKey=task-management-api'
+                }
+            }
+        }
     }
 }
+```
