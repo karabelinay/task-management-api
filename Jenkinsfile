@@ -31,8 +31,8 @@ pipeline {
 
         stage('Docker Run') {
             steps {
-                bat 'docker rm -f task-management-api-container 2>nul || exit /b 0'
-                bat 'docker run -d -p 8080:8080 --name task-management-api-container task-management-api'
+                bat 'docker rm -f task-management-api-container || exit 0'
+                bat 'docker run -d --name task-management-api-container --network task-network -p 8080:8080 task-management-api'
             }
         }
     }
