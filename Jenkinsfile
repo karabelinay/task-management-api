@@ -28,5 +28,12 @@ pipeline {
                 bat 'docker build -t task-management-api .'
             }
         }
+
+        stage('Docker Run') {
+            steps {
+                bat 'docker rm -f task-management-api-container 2>nul || exit /b 0'
+                bat 'docker run -d -p 8080:8080 --name task-management-api-container task-management-api'
+            }
+        }
     }
 }
