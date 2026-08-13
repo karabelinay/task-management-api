@@ -22,5 +22,11 @@ pipeline {
                 }
             }
         }
+
+        stage('Docker Image Build') {
+            steps {
+                bat 'docker build -t task-management-api .'
+            }
+        }
     }
 }
